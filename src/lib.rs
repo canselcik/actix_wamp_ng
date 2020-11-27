@@ -1,8 +1,8 @@
 #![allow(dead_code)]
-pub(crate) mod args;
+pub mod args;
 mod auth;
-pub(crate) mod connection;
-pub(crate) mod error;
+pub mod connection;
+pub mod error;
 mod messages;
 pub mod pubsub;
 mod transport;
@@ -53,7 +53,6 @@ impl SessionBuilder {
             + 'static,
     {
         let connection = connection::connect(transport);
-
         connection
             .send(self.msg)
             .then(|r| match r {
@@ -69,7 +68,7 @@ impl SessionBuilder {
         port: u16,
     ) -> impl Future<Output = Result<impl RpcEndpoint + PubSubEndpoint + Clone, Error>> {
         wss(host, port)
-            .map_err(|e| Error::WsClientError(format!("{}", e)))
+            .map_err(|e| Error::WsClientError(format!("{:?}", e)))
             .and_then(move |(transport, _hash)| self.create(transport))
     }
 }
