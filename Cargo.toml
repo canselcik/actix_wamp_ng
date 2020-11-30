@@ -1,6 +1,6 @@
 [package]
 name = "actix_wamp_ng"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Can Selcik <contact@cselcik.com>"]
 edition = "2018"
 
